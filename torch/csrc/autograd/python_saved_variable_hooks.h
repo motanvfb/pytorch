@@ -30,9 +30,9 @@ struct PyDefaultSavedVariableHooks {
 
 private:
   // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
-  static PyObject* pack_hook_;
+  static std::atomic<PyObject*> pack_hook_;
   // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
-  static PyObject* unpack_hook_;
+  static std::atomic<PyObject*> unpack_hook_;
 };
 
 }}
