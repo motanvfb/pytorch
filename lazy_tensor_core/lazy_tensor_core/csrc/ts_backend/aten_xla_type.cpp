@@ -564,6 +564,23 @@ at::Tensor XLANativeFunctions::le(const at::Tensor& self,
       LazyTensor::le(bridge::GetLtcTensor(self), bridge::GetLtcTensor(other)));
 }
 
+at::Tensor XLANativeFunctions::leaky_relu(const at::Tensor& self,
+                                          const at::Scalar& negative_slop) {
+  LTC_FN_COUNTER("xla::");
+  return bridge::AtenFromLtcTensor(
+      LazyTensor::leaky_relu(bridge::GetLtcTensor(self), negative_slop.toDouble()));
+}
+
+at::Tensor XLANativeFunctions::leaky_relu_backward(const at::Tensor& grad_output,
+                                                   const at::Tensor& input,
+                                                   const at::Scalar& negative_slop,
+                                                   bool self_is_result) {
+  LTC_FN_COUNTER("xla::");
+  return bridge::AtenFromLtcTensor(
+      LazyTensor::leaky_relu_backward(bridge::GetLtcTensor(grad_output),
+      bridge::GetLtcTensor(input), negative_slop.toDouble(), self_is_result));
+}
+
 at::Tensor XLANativeFunctions::lt(const at::Tensor& self,
                                   const at::Scalar& other) {
   LTC_FN_COUNTER("xla::");
